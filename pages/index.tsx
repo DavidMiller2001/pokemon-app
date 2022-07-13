@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, useContext } from 'react'
 import { PokemonImage } from '../components/PokemonImage'
+import { PokemonInfo } from '../components/PokemonInfo'
 import PokemonContext from '../context/PokemonContext'
 
 const Home: NextPage = () => {
@@ -35,22 +36,20 @@ const Home: NextPage = () => {
               type='text'
               onChange={handleTextChange}
               placeholder='find pokémon'
-              className='bg-white w-full p-4'
+              className='bg-white w-full p-4 '
             />
             <input
               type='submit'
               className='rounded bg-pink-400 cursor-pointer'
             />
           </div>
-          <div className='h-64 w-full bg-white flex flex-col justify-center items-center'>
+          <div className='h-64 w-full bg-white flex flex-col justify-center items-center rounded'>
             <div className='grid grid-cols-2 w-full h-full'>
               <div className='flex gap-4 justify-center items-center'>
                 <PokemonImage url={pokemon.sprites.front_default} />
                 <PokemonImage url={pokemon.sprites.back_default} />
               </div>
-              <div className='bg-black flex-grow p-4 flex justify-center items-center'>
-                <h2 className='text-white text-lg'>{pokemon.name}</h2>
-              </div>
+              <PokemonInfo pokemon={pokemon} />
             </div>
           </div>
         </form>
