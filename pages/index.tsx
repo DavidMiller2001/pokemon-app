@@ -4,6 +4,7 @@ import { useState, useContext } from 'react'
 import { PokemonImage } from '../components/PokemonImage'
 import { PokemonInfo } from '../components/PokemonInfo'
 import PokemonContext from '../context/PokemonContext'
+import { FaSearch } from 'react-icons/fa'
 
 const Home: NextPage = () => {
   const [text, setText] = useState('')
@@ -38,10 +39,12 @@ const Home: NextPage = () => {
               placeholder='find pokémon'
               className='bg-white w-full p-4 '
             />
-            <input
+            <button
               type='submit'
-              className='rounded bg-pink-400 cursor-pointer'
-            />
+              className='rounded rounded-l-none bg-pink-300 px-4'
+            >
+              <FaSearch size={20} />
+            </button>
           </div>
           <div className='h-64 w-full bg-white flex flex-col justify-center items-center rounded'>
             <div className='grid grid-cols-2 w-full h-full'>
