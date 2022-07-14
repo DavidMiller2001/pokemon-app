@@ -1,4 +1,4 @@
-import React from 'react'
+import { TypeImage } from './TypeImage'
 
 const capFirstLetter = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1)
@@ -15,7 +15,8 @@ export const PokemonInfo = ({ pokemon }) => {
           <li>
             <ul className='flex gap-4'>
               {pokemon.types.map((type) => {
-                return <li>{capFirstLetter(type.type.name)}</li>
+                // return <li>{capFirstLetter(type.type.name)}</li>
+                return <TypeImage type={type.type.name} />
               })}
             </ul>
           </li>
