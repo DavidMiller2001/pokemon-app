@@ -7,9 +7,7 @@ import { FaSearch } from 'react-icons/fa'
 
 const Home = () => {
   const [text, setText] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
-
-  const { pokemon, setPokemon, findPokemon } = useContext(PokemonContext)
+  const { pokemon, findPokemon, isLoading } = useContext(PokemonContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -44,19 +42,19 @@ const Home = () => {
             </button>
           </div>
           <div className='h-64 w-full bg-white flex flex-col justify-center items-center rounded'>
-            <div className='grid grid-cols-2 w-full h-full p-4'>
-              <div className='flex gap-4 justify-center items-center'>
-                {pokemon.name === 'undefined' ? (
-                  <h1 className='text-center'>Pokemon Not Found</h1>
-                ) : (
-                  <>
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              pokemon.name !== 'undefined' && (
+                <div className='grid grid-cols-2 w-full h-full p-4'>
+                  <div className='flex gap-4 justify-center items-center'>
                     <PokemonImage url={pokemon.sprites.front_default} />
                     <PokemonImage url={pokemon.sprites.back_default} />
-                  </>
-                )}
-              </div>
-              <PokemonInfo pokemon={pokemon} />
-            </div>
+                  </div>
+                  <PokemonInfo pokemon={pokemon} />
+                </div>
+              )
+            )}
           </div>
         </form>
       </div>

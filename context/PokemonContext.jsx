@@ -11,18 +11,26 @@ export const PokemonProvider = ({ children }) => {
     weight: '0',
   }
   const [pokemon, setPokemon] = useState(fakemon)
-
+  const [isLoading, setIsLoading] = useState(false)
   const findPokemon = async (text) => {
-    if (text === '') return alert('Enter a Pokemon!')
-    const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${text}`)
-    const data = await req.json()
-    console.log(req.status)
-
-    req.status === 200 ? setPokemon(data) : setPokemon(fakemon)
+    try {
+      if (text === '') return alert('Enter a Pokemon!')
+      setIsLoading(true)
+      const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${text}`)
+      const data = await req.json()
+      setPokemon(data)
+      setIsLoading(false)
+    } catch (err) {
+      alert('Pokemon not Found :(')
+      setPokemon(fakemon)
+      setIsLoading(false)
+    }
   }
 
   return (
-    <PokemonContext.Provider value={{ pokemon, setPokemon, findPokemon }}>
+    <PokemonContext.Provider
+      value={{ pokemon, setPokemon, findPokemon, isLoading, setIsLoading }}
+    >
       {children}
     </PokemonContext.Provider>
   )
