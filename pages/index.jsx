@@ -7,14 +7,12 @@ import { FaSearch } from 'react-icons/fa'
 
 const Home = () => {
   const [text, setText] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
 
   const { pokemon, setPokemon, findPokemon } = useContext(PokemonContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (text === '') {
-      window.alert('Please enter a valid pokemon!')
-    }
     await findPokemon(text)
   }
 
@@ -30,26 +28,32 @@ const Home = () => {
       </Head>
       <div className='w-screen h-screen bg-slate-800 flex flex-col justify-center items-center gap-16'>
         <h1 className='text-center text-5xl text-white'>Pokémon Finder</h1>
-        <form onSubmit={handleSubmit} className='w-2/3 flex flex-col gap-4'>
+        <form onSubmit={handleSubmit} className='max-w-3xl flex flex-col gap-4'>
           <div className='flex'>
             <input
               type='text'
               onChange={handleTextChange}
               placeholder='find pokémon'
-              className='bg-white w-full p-4 '
+              className='bg-white w-full p-4 rounded rounded-r-none'
             />
             <button
               type='submit'
-              className='rounded rounded-l-none bg-pink-300 px-4'
+              className='rounded rounded-l-none bg-pink-300 px-4 hover:text-white'
             >
               <FaSearch size={20} />
             </button>
           </div>
           <div className='h-64 w-full bg-white flex flex-col justify-center items-center rounded'>
-            <div className='grid grid-cols-2 w-full h-full'>
+            <div className='grid grid-cols-2 w-full h-full p-4'>
               <div className='flex gap-4 justify-center items-center'>
-                <PokemonImage url={pokemon.sprites.front_default} />
-                <PokemonImage url={pokemon.sprites.back_default} />
+                {pokemon.name === 'undefined' ? (
+                  <h1 className='text-center'>Pokemon Not Found</h1>
+                ) : (
+                  <>
+                    <PokemonImage url={pokemon.sprites.front_default} />
+                    <PokemonImage url={pokemon.sprites.back_default} />
+                  </>
+                )}
               </div>
               <PokemonInfo pokemon={pokemon} />
             </div>
