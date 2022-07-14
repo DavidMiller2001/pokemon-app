@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 650px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-child {
+    width: 100%;
+  }
+}

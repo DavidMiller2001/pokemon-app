@@ -24,7 +24,7 @@ const Home = () => {
         <title>Pokémon Finder</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='w-screen h-screen bg-slate-800 flex flex-col justify-center items-center gap-16'>
+      <div className='w-screen h-screen bg-slate-800 p-8 flex flex-col justify-center items-center gap-16'>
         <h1 className='text-center text-5xl text-white'>Pokémon Finder</h1>
         <form onSubmit={handleSubmit} className='max-w-3xl flex flex-col gap-4'>
           <div className='flex'>
@@ -41,13 +41,13 @@ const Home = () => {
               <FaSearch size={20} />
             </button>
           </div>
-          <div className='h-64 w-full bg-white flex flex-col justify-center items-center rounded'>
+          <div className='w-full bg-white flex flex-col justify-center items-center rounded'>
             {isLoading ? (
               <div>Loading...</div>
             ) : (
               pokemon.name !== 'undefined' && (
-                <div className='grid grid-cols-2 w-full h-full p-4'>
-                  <div className='flex gap-4 justify-center items-center'>
+                <div className='main grid grid-cols-2 p-4'>
+                  <div className='flex gap-4 justify-center items-center main-child'>
                     <PokemonImage url={pokemon.sprites.front_default} />
                     <PokemonImage url={pokemon.sprites.back_default} />
                   </div>
