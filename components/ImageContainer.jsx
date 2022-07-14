@@ -1,7 +1,7 @@
 import React from 'react'
 import { PokemonImage } from './PokemonImage'
 
-export const ImageContainer = (frontUrl: any, backUrl: any) => {
+export const ImageContainer = (frontUrl, backUrl) => {
   if (frontUrl === '' || backUrl === '') return <h1>Pokemon not Found :/</h1>
   return (
     <div className='flex gap-4 justify-center items-center'>

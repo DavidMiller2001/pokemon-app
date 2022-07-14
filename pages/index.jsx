@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, useContext } from 'react'
 import { PokemonImage } from '../components/PokemonImage'
@@ -6,12 +5,12 @@ import { PokemonInfo } from '../components/PokemonInfo'
 import PokemonContext from '../context/PokemonContext'
 import { FaSearch } from 'react-icons/fa'
 
-const Home: NextPage = () => {
+const Home = () => {
   const [text, setText] = useState('')
 
   const { pokemon, setPokemon, findPokemon } = useContext(PokemonContext)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (text === '') {
       window.alert('Please enter a valid pokemon!')
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
     await findPokemon(text)
   }
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e) => {
     setText(e.target.value)
   }
 

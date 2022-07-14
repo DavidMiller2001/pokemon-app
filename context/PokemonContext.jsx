@@ -1,29 +1,30 @@
 import { createContext, useState } from 'react'
 
-const PokemonContext: any = createContext(undefined)
+const PokemonContext = createContext(undefined)
 
-export const PokemonProvider = ({ children }: { children: any }) => {
-  type Pokemon = {
-    name: string
-    sprites: {
-      front_default: string
-      back_default: string
-    }
-  }
-
+export const PokemonProvider = ({ children }) => {
   const [pokemon, setPokemon] = useState({
     name: 'test',
-    sprites: { front_default: '' },
+    sprites: { front_default: '', back_default: '' },
+    types: [],
+    height: '0',
+    weight: '0',
   })
 
-  const findPokemon = async (text: string) => {
+  const findPokemon = async (text) => {
     try {
       const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${text}`)
-      const data = (await req.json()) as Pokemon
+      const data = await req.json()
       await setPokemon(data)
     } catch (err) {
       console.log(err)
-      setPokemon({ name: '', sprites: { front_default: '' } })
+      setPokemon({
+        name: '',
+        sprites: { front_default: '', back_default: '' },
+        types: [],
+        height: '0',
+        weight: '0',
+      })
     }
   }
 
